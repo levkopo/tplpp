@@ -8,8 +8,8 @@ use Closure;
 
 class Template {
 
-    private array $values;
-    private array $booleans;
+    private array $values = [];
+    private array $booleans = [];
     private string $tpl;
 
     public function __construct(string $tpl) {
