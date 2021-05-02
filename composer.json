@@ -1,0 +1,20 @@
+{
+  "name": "levkopo/tplpp",
+  "description": "Library for TPL",
+  "minimum-stability": "stable",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "levkopo",
+      "email": "levkopoag@gmail.com"
+    }
+  ],
+
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "tplpp\\": "src/tplpp"
+    }
+  }
+}
