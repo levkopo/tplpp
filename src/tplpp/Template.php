@@ -76,4 +76,8 @@ class Template {
 
         return $this->tpl;
     }
+
+    public function __toString(): string {
+        return $this->build();
+    }
 }
