@@ -4,6 +4,8 @@
 namespace tplpp;
 
 
+use Closure;
+
 class Template {
 
     private array $values;
@@ -57,12 +59,18 @@ class Template {
 
         if(preg_match_all('/\[tpl-(.+?): (.+?)]/', $this->tpl, $output_array)){
             for($i = 0, $iMax = count($output_array[0]); $i < $iMax; $i++){
-                if($output_array[1][$i]==="use") {
-                    $childTemplate = TplPP::getTemplate($output_array[2][$i]);
-                    $childTemplate->setParent($this);
+                $args = explode(",", $output_array[2][$i]);
+                $functionName = $output_array[1][$i];
 
-                    $this->tpl = str_replace($output_array[0][$i], $childTemplate->build(), $this->tpl);
+                $functionResponse = "";
+                if(isset(TplPP::$functions[$functionName])){
+                    $function = TplPP::$functions[$functionName];
+                    if($function instanceof Closure) {
+                        $functionResponse = $function->call($this, $args);
+                    }
                 }
+
+                $this->tpl = str_replace($output_array[0][$i], $functionResponse, $this->tpl);
             }
         }
 
