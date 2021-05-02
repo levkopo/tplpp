@@ -8,8 +8,8 @@ use JetBrains\PhpStorm\Language;
 class TplPP {
     public static array $functions = [];
 
-    protected static string $resources;
-    protected static Template $mainTemplate;
+    private static string $resources = "./";
+    private static ?Template $mainTemplate = null;
 
     public static function setResources(#[Language("file-reference")] string $resources): void{
         self::$resources = $resources;
